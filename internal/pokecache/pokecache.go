@@ -1,6 +1,7 @@
 package pokecache
 
 import (
+	"fmt"
 	"sync"
 	"time"
 )
@@ -40,6 +41,10 @@ func (c *Cache) Get(key string) ([]byte, bool) {
 	c.mux.Lock()
 	defer c.mux.Unlock()
 	val, ok := c.cache[key]
+
+	if ok {
+		fmt.Printf("Get from Cache: %s\n", key)
+	}
 	return val.val, ok
 }
 
